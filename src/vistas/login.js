@@ -10,8 +10,7 @@ export function login(navigateTo) {
   const textRegister = document.createElement('p');
   const linkRegister = document.createElement('p'); // revisar como saltar a vista de registro
   const imgFamiliaHome = document.createElement('img');
-  const footer = document.createElement('footer');
-
+  
   logoGrande.className = 'logoGrande';
   inputUser.className = 'inputUser';
   inputPassword.className = 'inputPass';
@@ -20,7 +19,6 @@ export function login(navigateTo) {
   textRegister.className = 'textRegister';
   linkRegister.className = 'linkRegister';
   imgFamiliaHome.className = 'familyImg';
-  footer.className = 'footer';
   divLogin.className = 'divLogin';
 
   logoGrande.src = './img/logoLKP_final.png';
@@ -31,7 +29,7 @@ export function login(navigateTo) {
   textRegister.textContent = "Don't have an account?";
   linkRegister.textContent = 'Register';
   imgFamiliaHome.src = './img/comunidad.png';
-  footer.textContent = 'Copyright © 2023 Isabel Lira, Kat Bravo & Alejandra Martínez';
+  
 
   divRegister.addEventListener('click', () => {
     navigateTo('/register');
@@ -39,7 +37,7 @@ export function login(navigateTo) {
 
   divRegister.append(textRegister, linkRegister)
   divLogin.append(inputUser, inputPassword, loginBtn, loginGoogle, divRegister);
-  LoginSection.append(logoGrande, divLogin, imgFamiliaHome, footer);
+  LoginSection.append(logoGrande, divLogin, imgFamiliaHome);
   return LoginSection;
 
 }
