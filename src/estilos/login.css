@@ -141,7 +141,7 @@ body {
   text-align: center;
 }
 
-.inputUserRegister {
+.inputPassRegister {
   width: 229px;
   height: 42px;
   position: absolute;
@@ -156,29 +156,13 @@ body {
   text-align: center;
 }
 
-.inputPassRegister {
-  width: 229px;
-  height: 42px;
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 134px;
-  margin: auto;
-  font-family: 'Montserrat', sans-serif;
-  border: 1px solid #AFACAC;
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-  border-radius: 15px;
-  text-align: center;
-}
-
 .btnRegister {
   width: 277px;
   height: 42px;
   position: absolute;
   left: 0;
   right: 0;
-  top: 190px;
-  /*176*/
+  top: 134px;
   margin: auto;
   font-family: 'Montserrat', sans-serif;
   background-color: #F89626;
@@ -196,8 +180,19 @@ body {
   position: absolute;
   left: 0;
   right: 0;
-  top: 246px;
+  top: 190px;
   margin: auto;
+}
+
+.errorText {
+  color: red;
+  text-align: center;
+  font-family: Arial, Helvetica, sans-serif;
+  position: absolute;
+  left: 0;
+  right: 0;
+  margin: 0;
+  top: 246px;
 }
 
 .returnDiv {

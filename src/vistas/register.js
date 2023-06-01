@@ -5,7 +5,7 @@ export function register(navigateTo) {
   const divRegister = document.createElement('div');
   const signUpForm = document.createElement('form');
   const inputMail = document.createElement('input');
-  const inputUserRegister = document.createElement('input');
+  const errorText = document.createElement('p');
   const inputPasswordRegister = document.createElement('input');
   const registerBtn = document.createElement('button');
   const registerGoogle = document.createElement('button');
@@ -17,8 +17,9 @@ export function register(navigateTo) {
   logoPeque.className = 'logoPeque';
   divRegister.className = 'divRegister';
   inputMail.className = 'inputMail';
-  inputUserRegister.className = 'inputUserRegister';
+  errorText.className = 'errorText';
   inputPasswordRegister.className = 'inputPassRegister';
+  inputPasswordRegister.type = 'password';
   registerBtn.className = 'btnRegister';
   registerGoogle.className = 'btnRegGoogle';
   returnDiv.className = 'returnDiv';
@@ -28,7 +29,6 @@ export function register(navigateTo) {
 
   logoPeque.src = './img/logoLKP_final.png';
   inputMail.placeholder = 'E-mail';
-  inputUserRegister.placeholder = 'User';
   inputPasswordRegister.placeholder = 'Password';
   registerBtn.textContent = 'Register';
   registerBtn.type = 'submit';
@@ -40,31 +40,48 @@ export function register(navigateTo) {
   returnDiv.addEventListener('click', () => {
     navigateTo('/');
   });
-  
+
   registerBtn.addEventListener('click', (e) => {
     e.preventDefault()
     console.log("funciona")
-    const promesaRegistro = registerEmail(inputMail.value,inputPasswordRegister.value)
+    const promesaRegistro = registerEmail(inputMail.value, inputPasswordRegister.value)
     promesaRegistro.then((userCredential) => {
-            // Signed in
-            console.log(userCredential)
-            const user = userCredential.user;
-            console.log('registroExitoso');
-            // ...
-        })
-        .catch((error) => {
-            const errorCode = error.code;
-            const errorMessage = error.message;
-            console.log('falló la promesa',error)
-            // ..
-        });
-    
-  })
+      // Signed in
+      console.log(userCredential)
+      const user = userCredential.user;
+      console.log('registroExitoso');
+      // ...
+    })
+      .catch((error) => {
+        let errorMessage = '';
 
-  signUpForm.append(inputMail, inputUserRegister, inputPasswordRegister, registerBtn, registerGoogle);
+        switch (error.code) {
+          case 'auth/invalid-email':
+            errorMessage = 'Invalid e-mail adress';
+            break;
+          case 'auth/weak-password':
+            errorMessage = 'Weak password. Must be at least 6 characters.';
+            break;
+          case 'auth/email-already-in-use':
+            errorMessage = 'E-mail already in use';
+            break;
+          // Otros códigos de error que desees manejar
+          // case 'auth/another-error-code':
+          //   errorMessage = 'Mensaje de error personalizado.';
+          //   break;
+          default:
+            errorMessage = "Couldn't register your account. Please verify e-mail and password.";
+            break;
+        }
+
+        errorText.textContent = errorMessage;
+      });
+  });
+
+  divRegister.appendChild(errorText);
+  signUpForm.append(inputMail, inputPasswordRegister, registerBtn, registerGoogle);
   returnDiv.append(returnImg, returnLink);
   divRegister.append(signUpForm, returnDiv);
   registerSection.append(logoPeque, divRegister, imgFamiliaHome);
   return registerSection;
-
-}
+};

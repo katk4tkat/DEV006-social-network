@@ -1,6 +1,6 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
-import { getAuth,createUserWithEmailAndPassword } from "firebase/auth";
+import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -21,16 +21,33 @@ const auth = getAuth(app);
 
 export function registerEmail(email, password) {
   const auth = getAuth();
- const promesaRegistro = createUserWithEmailAndPassword(auth, email, password)
-      // .then((userCredential) => {
-      //     // Signed in
-      //     const user = userCredential.user;
-      //     // ...
-      // })
-      // .catch((error) => {
-      //     const errorCode = error.code;
-      //     const errorMessage = error.message;
-      //     // ..
-      // });
-return promesaRegistro
+  const promesaRegistro = createUserWithEmailAndPassword(auth, email, password)
+  return promesaRegistro
 }
+/*   .catch((error) => {
+      let errorMessage = '';
+
+      switch (error.code) {
+        case 'auth/invalid-email':
+          errorMessage = 'Invalid e-mail adress';
+          break;
+        case 'auth/weak-password':
+          errorMessage = 'Weak password. Must be at least 6 characters.';
+          break;
+        case 'auth/email-already-in-use':
+          errorMessage = 'E-mail already in use';
+          break;
+        // Otros códigos de error que desees manejar
+        // case 'auth/another-error-code':
+        //   errorMessage = 'Mensaje de error personalizado.';
+        //   break;
+        default:
+          errorMessage = "Couldn't register your account. Please verify e-mail and password.";
+          break;
+      } 
+
+      throw new Error(errorMessage);
+    });
+
+  return promesaRegistro;
+} */
