@@ -3,6 +3,137 @@ body {
     font-family: 'Montserrat', sans-serif;
   }
   
+  /* Register */
+
+.logoPeque {
+  width: 108px;
+  height: 131.51px;
+  position: absolute;
+  left: 0;
+  right: 0;
+  margin: auto;
+}
+
+.divRegister {
+  position: absolute;
+  width: 300px;
+  height: 341px;
+  left: calc(50% - 300px/2);
+  top: 150px;
+  background: #FFFFFF;
+  box-shadow: 0px 4px 4px #8AF0D8;
+  border-radius: 15px;
+
+}
+
+.inputMail {
+  width: 229px;
+  height: 42px;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 22px;
+  margin: auto;
+  font-family: 'Montserrat', sans-serif;
+  border: 1px solid #AFACAC;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 15px;
+  text-align: center;
+}
+
+.inputPassRegister {
+  width: 229px;
+  height: 42px;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 78px;
+  margin: auto;
+  font-family: 'Montserrat', sans-serif;
+  border: 1px solid #AFACAC;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 15px;
+  text-align: center;
+}
+
+.btnRegister {
+  width: 277px;
+  height: 42px;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 134px;
+  margin: auto;
+  font-family: 'Montserrat', sans-serif;
+  background-color: #F89626;
+  color: #FFFFFF;
+  border: none;
+  box-shadow: 0px 4px 4px #AFACAC;
+  border-radius: 15px;
+  font-size: medium;
+  ;
+}
+
+.btnRegister:hover{
+  background-color:#fba645;
+
+}
+
+.btnRegGoogle {
+  width: 277px;
+  height: 42px;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 190px;
+  margin: auto;
+}
+
+.errorText {
+  color: red;
+  text-align: center;
+  font-family: Arial, Helvetica, sans-serif;
+  position: absolute;
+  left: 0;
+  right: 0;
+  margin: 0;
+  top: 246px;
+}
+
+.returnDiv {
+  position: absolute;
+  width: 65px;
+  height: 19.67px;
+  top: 300px;
+  left: 0;
+  right: 0;
+  margin: auto;
+}
+
+.returnImg {
+  position: absolute;
+  width: 11.25px;
+  height: 19.67px;
+  display: inline;
+  margin-right: 10px;
+}
+
+.returnLink {
+  position: absolute;
+  width: 54px;
+  height: 14px;
+  left: 20px;
+  top: -11px;
+  font-family: 'Montserrat', sans-serif;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 15px;
+  line-height: 15px;
+  text-align: center;
+  color: #F89626;
+  display: inline;
+}
+
   .logoGrande {
     width: 108px;
     height: 131.51px;
@@ -69,6 +200,8 @@ body {
   }
   
   .btnGoogle{
+  display: flex;
+  align-items: start;
   width: 277px;
   height: 42px;
   position: absolute;
@@ -76,6 +209,44 @@ body {
   right: 0;
   top: 190px;
   margin: auto;
+  }
+
+  .divBtnGoogle {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: auto;
+  }
+  
+  .btnRegGoogle {
+    width: 200px;
+    height: 42px;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 190px;
+    margin: auto;
+    background-color: #3367D6;
+    color: #ffffff;
+    border: none;
+    box-shadow: 0px 4px 4px #AFACAC;
+    border-radius: 15px;
+  }
+  .btnRegGoogle:hover{ 
+    background-color: #4285F4;
+  }
+
+  .logoGoogle {
+    margin-right: 5px;
+    border-radius: 20px;
+    height: 25px;
+    width: 25px;
+  }
+  
+
+  .textoGoogle {
+    font-family: 'Montserrat', sans-serif;
   }
   
   
@@ -133,3 +304,69 @@ body {
     top: 612px;
     background: #FFD1F7;
   }
+
+@media (max-width: 768px) {
+
+    /* Register */
+    .logoPeque {
+      width: 15%;
+      max-width: 108px;
+      height: auto;
+      position: absolute;
+      left: 0;
+      right: 0;
+      margin: auto;
+    }
+  
+    .divRegister {
+      position: absolute;
+      width: 80%;
+      max-width: 300px;
+      height: auto;
+      left: 50%;
+      transform: translateX(-50%);
+      top: 150px;
+      background: #FFFFFF;
+      box-shadow: 0px 4px 4px #8AF0D8;
+      border-radius: 15px;
+    }
+  
+    .inputMail,
+    .inputUserRegister,
+    .inputPassRegister {
+      width: 80%;
+      max-width: 229px;
+      height: auto;
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      top: 22px;
+      margin: auto;
+      font-family: 'Montserrat', sans-serif;
+      border: 1px solid #AFACAC;
+      box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+      border-radius: 15px;
+      text-align: center;
+    }
+  
+    .btnRegister,
+    .btnRegGoogle,
+    .returnDiv,
+    .btnLogin,
+    .btnGoogle {
+      width: 80%;
+      max-width: 277px;
+      height: auto;
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+  
+    .familyImg {
+      width: 100%;
+      max-width: 358px;
+      height: auto;
+      left: 3px;
+      top: 20%;
+    }
+}

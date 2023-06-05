@@ -1,4 +1,4 @@
-import { registerEmail, signInWithGoogle} from '../config/firebase.js'
+import { registerEmail, signInWithGoogle } from '../config/firebase.js';
 
 export function register(navigateTo) {
   const registerSection = document.createElement('section');
@@ -9,7 +9,10 @@ export function register(navigateTo) {
   const errorText = document.createElement('p');
   const inputPasswordRegister = document.createElement('input');
   const registerBtn = document.createElement('button');
+  const divBtnGoogle = document.createElement('div');
   const registerGoogleBotton = document.createElement('button');
+  const logoRegisterGoogle = document.createElement('img');
+  const textRegisterGoogle = document.createElement('p');
   const returnDiv = document.createElement('div');
   const returnImg = document.createElement('img');
   const returnLink = document.createElement('p');
@@ -22,6 +25,9 @@ export function register(navigateTo) {
   inputPasswordRegister.className = 'inputPassRegister';
   inputPasswordRegister.type = 'password';
   registerBtn.className = 'btnRegister';
+  divBtnGoogle.className = 'divBtnGoogle';
+  logoRegisterGoogle.className = 'logoGoogle';
+  textRegisterGoogle.className = 'textoGoogle';
   registerGoogleBotton.className = 'btnRegGoogle';
   returnDiv.className = 'returnDiv';
   returnImg.className = 'returnImg';
@@ -33,7 +39,8 @@ export function register(navigateTo) {
   inputPasswordRegister.placeholder = 'Password';
   registerBtn.textContent = 'Register';
   registerBtn.type = 'submit';
-  registerGoogleBotton.textContent = 'Google';
+  logoRegisterGoogle.src = './img/googleBLANCO.png';
+  textRegisterGoogle.textContent = 'Continue with Google';
   returnImg.src = './img/left-arrowOrange.png';
   returnLink.textContent = 'Return';
   imgFamiliaHome.src = './img/comunidad.png';
@@ -43,14 +50,15 @@ export function register(navigateTo) {
   });
 
   registerBtn.addEventListener('click', (e) => {
-    e.preventDefault()
-    console.log("funciona")
-    const promesaRegistro = registerEmail(inputMail.value, inputPasswordRegister.value)
+    e.preventDefault();
+    console.log('funciona');
+    const promesaRegistro = registerEmail(inputMail.value, inputPasswordRegister.value);
     promesaRegistro.then((userCredential) => {
       // Signed in
-      console.log(userCredential)
+      console.log(userCredential);
       const user = userCredential.user;
       console.log('registroExitoso');
+      console.log(user);
       // ...
     })
       .catch((error) => {
@@ -78,36 +86,39 @@ export function register(navigateTo) {
         errorText.textContent = errorMessage;
       });
   });
-  
+
   registerGoogleBotton.addEventListener('click', (e) => {
-    e.preventDefault()
-    console.log("funciona")
-    const promesaRegistroGoogle = signInWithGoogle()
-  promesaRegistroGoogle.then((result) => {
-    // This gives you a Google Access Token. You can use it to access the Google API.
-    const credential = GoogleAuthProvider.credentialFromResult(result);
-    const token = credential.accessToken;
-    // The signed-in user info.
-    const user = result.user;
-    // IdP data available using getAdditionalUserInfo(result)
-    // ...
-  }).catch((error) => {
-    // Handle Errors here.
-    const errorCode = error.code;
-    const errorMessage = error.message;
-    // The email of the user's account used.
-    const email = error.customData.email;
-    // The AuthCredential type that was used.
-    const credential = GoogleAuthProvider.credentialFromError(error);
-    // ...
+    e.preventDefault();
+    console.log('funciona');
+    const promesaRegistroGoogle = signInWithGoogle();
+    promesaRegistroGoogle.then((result) => {
+      // This gives you a Google Access Token. You can use it to access the Google API.
+      const credential = GoogleAuthProvider.credentialFromResult(result);
+      const token = credential.accessToken;
+      // The signed-in user info.
+      const user = result.user;
+      // IdP data available using getAdditionalUserInfo(result)
+      // ...
+      console.log(token, user, credential);
+    }).catch((error) => {
+      // Handle Errors here.
+      const errorCode = error.code;
+      const errorMessage = error.message;
+      // The email of the user's account used.
+      const email = error.customData.email;
+      // The AuthCredential type that was used.
+      const credential = GoogleAuthProvider.credentialFromError(error);
+      // ...
+      console.log(errorCode, errorMessage, email, credential);
+    });
   });
-  })
-  
 
   divRegister.appendChild(errorText);
   signUpForm.append(inputMail, inputPasswordRegister, registerBtn, registerGoogleBotton);
+  divBtnGoogle.append(logoRegisterGoogle, textRegisterGoogle);
+  registerGoogleBotton.append(divBtnGoogle);
   returnDiv.append(returnImg, returnLink);
   divRegister.append(signUpForm, returnDiv);
   registerSection.append(logoPeque, divRegister, imgFamiliaHome);
   return registerSection;
-};
+}

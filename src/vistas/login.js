@@ -5,17 +5,23 @@ export function login(navigateTo) {
   const inputUser = document.createElement('input');
   const inputPassword = document.createElement('input');
   const loginBtn = document.createElement('button');
-  const loginGoogle = document.createElement('button');
+  const divBtnGoogle = document.createElement('div');
+  const registerGoogleBotton = document.createElement('button');
+  const logoRegisterGoogle = document.createElement('img');
+  const textRegisterGoogle = document.createElement('p');
   const divRegister = document.createElement('div');
   const textRegister = document.createElement('p');
-  const linkRegister = document.createElement('p'); // revisar como saltar a vista de registro
+  const linkRegister = document.createElement('p');
   const imgFamiliaHome = document.createElement('img');
-  
+
   logoGrande.className = 'logoGrande';
   inputUser.className = 'inputUser';
   inputPassword.className = 'inputPass';
   loginBtn.className = 'btnLogin';
-  loginGoogle.className = 'btnGoogle';
+  divBtnGoogle.className = 'divBtnGoogle';
+  logoRegisterGoogle.className = 'logoGoogle';
+  textRegisterGoogle.className = 'textoGoogle';
+  registerGoogleBotton.className = 'btnRegGoogle';
   textRegister.className = 'textRegister';
   linkRegister.className = 'linkRegister';
   imgFamiliaHome.className = 'familyImg';
@@ -25,7 +31,8 @@ export function login(navigateTo) {
   inputUser.placeholder = 'User';
   inputPassword.placeholder = 'Password';
   loginBtn.textContent = 'Login';
-  loginGoogle.textContent = 'Google';
+  logoRegisterGoogle.src = './img/googleBLANCO.png';
+  textRegisterGoogle.textContent = 'Continue with Google';
   textRegister.textContent = "Don't have an account?";
   linkRegister.textContent = 'Register';
   imgFamiliaHome.src = './img/comunidad.png';
@@ -35,9 +42,10 @@ export function login(navigateTo) {
     navigateTo('/register');
   });
 
-  divRegister.append(textRegister, linkRegister)
-  divLogin.append(inputUser, inputPassword, loginBtn, loginGoogle, divRegister);
+  divRegister.append(textRegister, linkRegister);
+  divLogin.append(inputUser, inputPassword, loginBtn, divRegister);
+  divBtnGoogle.append(logoRegisterGoogle, textRegisterGoogle);
+  registerGoogleBotton.append(divBtnGoogle);
   LoginSection.append(logoGrande, divLogin, imgFamiliaHome);
   return LoginSection;
-
 }
