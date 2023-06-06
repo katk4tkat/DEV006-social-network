@@ -49,7 +49,11 @@
   ;
 }
 
-.divBtnGoogle {
+.btnLogin:hover{
+  background-color:#fba645;
+}
+
+.divBtnGoogleLogin {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -57,7 +61,7 @@
   height: auto;
 }
 
-.btnRegGoogle {
+.btnRegGoogleLogin {
   width: 200px;
   height: 42px;
   position: absolute;
@@ -71,23 +75,20 @@
   box-shadow: 0px 4px 4px #AFACAC;
   border-radius: 15px;
 }
-.btnRegGoogle:hover{ 
+.btnRegGoogleLogin:hover{ 
   background-color: #4285F4;
 }
 
-.logoGoogle {
+.logoGoogleLogin {
   margin-right: 5px;
   border-radius: 20px;
   height: 25px;
   width: 25px;
 }
 
-
-.textoGoogle {
+.textoGoogleLogin {
   font-family: 'Montserrat', sans-serif;
 }
-
-
 
 .textRegister {
   width: 200px;
@@ -119,4 +120,8 @@
   text-align: center;
 
   color: #F89626;
+}
+
+.linkRegister:hover{
+  color:#fbb667;
 }

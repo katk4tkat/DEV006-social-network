@@ -1,12 +1,14 @@
-export function login(navigateTo) {
+import { signInWithGoogle, SignInEmail } from '../config/firebase.js';
+
+export function login(navigateTo,) {
   const LoginSection = document.createElement('section');
   const logoGrande = document.createElement('img');
   const divLogin = document.createElement('div');
-  const inputUser = document.createElement('input');
+  const inputEmail = document.createElement('input');
   const inputPassword = document.createElement('input');
   const loginBtn = document.createElement('button');
   const divBtnGoogle = document.createElement('div');
-  const registerGoogleBotton = document.createElement('button');
+  const loginGoogleButton = document.createElement('button');
   const logoRegisterGoogle = document.createElement('img');
   const textRegisterGoogle = document.createElement('p');
   const divRegister = document.createElement('div');
@@ -15,37 +17,82 @@ export function login(navigateTo) {
   const imgFamiliaHome = document.createElement('img');
 
   logoGrande.className = 'logoGrande';
-  inputUser.className = 'inputUser';
+  inputEmail.className = 'inputUser';
   inputPassword.className = 'inputPass';
   loginBtn.className = 'btnLogin';
-  divBtnGoogle.className = 'divBtnGoogle';
-  logoRegisterGoogle.className = 'logoGoogle';
-  textRegisterGoogle.className = 'textoGoogle';
-  registerGoogleBotton.className = 'btnRegGoogle';
+  divBtnGoogle.className = 'divBtnGoogleLogin';
+  logoRegisterGoogle.className = 'logoGoogleLogin';
+  textRegisterGoogle.className = 'textoGoogleLogin';
+  loginGoogleButton.className = 'btnRegGoogleLogin';
   textRegister.className = 'textRegister';
   linkRegister.className = 'linkRegister';
   imgFamiliaHome.className = 'familyImg';
   divLogin.className = 'divLogin';
 
   logoGrande.src = './img/logoLKP_final.png';
-  inputUser.placeholder = 'User';
+  inputEmail.placeholder = 'e-mail';
   inputPassword.placeholder = 'Password';
+  inputPassword.type = 'password';
   loginBtn.textContent = 'Login';
   logoRegisterGoogle.src = './img/googleBLANCO.png';
   textRegisterGoogle.textContent = 'Continue with Google';
   textRegister.textContent = "Don't have an account?";
   linkRegister.textContent = 'Register';
   imgFamiliaHome.src = './img/comunidad.png';
-  
 
   divRegister.addEventListener('click', () => {
     navigateTo('/register');
   });
 
+  loginBtn.addEventListener('click', (e) => {
+    e.preventDefault();
+    console.log('funciona btn login');
+    const promesaLoginEmailAndPassword = SignInEmail(inputEmail.value, inputPassword.value);
+    promesaLoginEmailAndPassword.then((userCredential) => {
+      // Signed in
+      const user = userCredential.user;
+      // ...
+      console.log(user.email, user.displayName);
+      console.log('inicio exitoso');
+      navigateTo('/register');
+    })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        console.log(errorCode, errorMessage);
+      });
+  });
+
+  loginGoogleButton.addEventListener('click', (e) => {
+    e.preventDefault();
+    console.log('funciona');
+    const promesaRegistroGoogle = signInWithGoogle();
+    promesaRegistroGoogle.then((result) => {
+      // This gives you a Google Access Token. You can use it to access the Google API.
+      const credential = GoogleAuthProvider.credentialFromResult(result);
+      const token = credential.accessToken;
+      // The signed-in user info.
+      const user = result.user;
+      // IdP data available using getAdditionalUserInfo(result)
+      // ...
+      console.log(token, user, credential);
+    }).catch((error) => {
+      // Handle Errors here.
+      const errorCode = error.code;
+      const errorMessage = error.message;
+      // The email of the user's account used.
+      const email = error.customData.email;
+      // The AuthCredential type that was used.
+      const credential = GoogleAuthProvider.credentialFromError(error);
+      // ...
+      console.log(errorCode, errorMessage, email, credential);
+    });
+  });
+
   divRegister.append(textRegister, linkRegister);
-  divLogin.append(inputUser, inputPassword, loginBtn, divRegister);
   divBtnGoogle.append(logoRegisterGoogle, textRegisterGoogle);
-  registerGoogleBotton.append(divBtnGoogle);
+  loginGoogleButton.append(divBtnGoogle);
+  divLogin.append(inputEmail, inputPassword, loginBtn, loginGoogleButton, divRegister);
   LoginSection.append(logoGrande, divLogin, imgFamiliaHome);
   return LoginSection;
 }
