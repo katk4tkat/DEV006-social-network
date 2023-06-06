@@ -1,8 +1,8 @@
 // importamos la funcion que vamos a testear
-import { myFunction } from '../src/lib/index';
+import { registerEmail } from '../src/config/firebase.js';
 
-describe('myFunction', () => {
+describe('registerEmail', () => {
   it('debería ser una función', () => {
-    expect(typeof myFunction).toBe('function');
+    expect(typeof registerEmail).toBe('function');
   });
 });
