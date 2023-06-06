@@ -49,8 +49,8 @@
   ;
 }
 
-.btnLogin:hover{
-  background-color:#fba645;
+.btnLogin:hover {
+  background-color: #fba645;
 }
 
 .divBtnGoogleLogin {
@@ -75,7 +75,8 @@
   box-shadow: 0px 4px 4px #AFACAC;
   border-radius: 15px;
 }
-.btnRegGoogleLogin:hover{ 
+
+.btnRegGoogleLogin:hover {
   background-color: #4285F4;
 }
 
@@ -122,6 +123,77 @@
   color: #F89626;
 }
 
-.linkRegister:hover{
-  color:#fbb667;
+.linkRegister:hover {
+  color: #fbb667;
+}
+
+.familyImg {
+  width: 100%;
+  max-width: 358px;
+  height: auto;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 20px;
+}
+
+@media (max-width: 768px) {
+
+  /* login */
+  .logoGrande {
+    width: 15%;
+    max-width: 108px;
+    height: auto;
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin: auto;
+  }
+
+  .divLogin {
+    position: absolute;
+    width: 80%;
+    max-width: 300px;
+    height: auto;
+    left: 50%;
+    transform: translateX(-50%);
+    top: 150px;
+    background: #FFFFFF;
+    box-shadow: 0px 4px 4px #8AF0D8;
+    border-radius: 15px;
+  }
+
+  .inputUser .inputPass {
+    width: 80%;
+    max-width: 229px;
+    height: auto;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    top: 22px;
+    margin: auto;
+    font-family: 'Montserrat', sans-serif;
+    border: 1px solid #AFACAC;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 15px;
+    text-align: center;
+  }
+
+  .btnLogin {
+
+    width: 80%;
+    max-width: 277px;
+    height: auto;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .familyImg {
+    width: 80%;
+    max-width: 300px;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: -100px;
+  }
 }
