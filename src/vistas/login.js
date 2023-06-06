@@ -68,15 +68,10 @@ export function login(navigateTo,) {
     console.log('funciona');
     const promesaRegistroGoogle = signInWithGoogle();
     promesaRegistroGoogle.then((result) => {
-      // This gives you a Google Access Token. You can use it to access the Google API.
-      const credential = GoogleAuthProvider.credentialFromResult(result);
-      const token = credential.accessToken;
-      // The signed-in user info.
-      const user = result.user;
-      // IdP data available using getAdditionalUserInfo(result)
-      // ...
-      console.log(token, user, credential);
+      console.log(result, 'funciona result promesa');
+    navigateTo('/');  
     }).catch((error) => {
+      console.log(error, 'catch de google');
       // Handle Errors here.
       const errorCode = error.code;
       const errorMessage = error.message;
