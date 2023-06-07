@@ -4,11 +4,14 @@
 import { home } from './vistas/home.js';
 import { login } from './vistas/login.js';
 import { register } from './vistas/register.js';
+import { wall } from './vistas/wall.js';
+// import { error } from './vistas/error.js';
 
 const routes = [
   { path: '/', component: home },
   { path: '/login', component: login },
   { path: '/register', component: register },
+  { path: '/wall', component: wall },
 ];
 
 const defaultRoute = '/';
@@ -28,11 +31,10 @@ function navigateTo(hash) {
       root.removeChild(root.firstChild);
     }
     root.append(route.component(navigateTo));
-    } else {
+  } else {
     navigateTo('/error');
-    }
   }
-  
+}
 
 // root.appendChild(route.component(navigateTo));
 

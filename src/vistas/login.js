@@ -1,6 +1,6 @@
 import { signInWithGoogle, SignInEmail } from '../config/firebase.js';
 
-export function login(navigateTo,) {
+export function login(navigateTo) {
   const LoginSection = document.createElement('section');
   const logoGrande = document.createElement('img');
   const divLogin = document.createElement('div');
@@ -54,7 +54,7 @@ export function login(navigateTo,) {
       // ...
       console.log(user.email, user.displayName);
       console.log('inicio exitoso');
-      navigateTo('/register');
+      navigateTo('/wall');
     })
       .catch((error) => {
         const errorCode = error.code;
@@ -69,7 +69,7 @@ export function login(navigateTo,) {
     const promesaRegistroGoogle = signInWithGoogle();
     promesaRegistroGoogle.then((result) => {
       console.log(result, 'funciona result promesa');
-    navigateTo('/');  
+      navigateTo('/');
     }).catch((error) => {
       console.log(error, 'catch de google');
       // Handle Errors here.
