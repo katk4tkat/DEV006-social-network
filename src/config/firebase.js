@@ -1,8 +1,13 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from 'firebase/app';
 import {
-  getAuth, createUserWithEmailAndPassword, GoogleAuthProvider, signInWithPopup, signInWithEmailAndPassword,
+  getAuth, createUserWithEmailAndPassword, GoogleAuthProvider, signInWithPopup,
+  signInWithEmailAndPassword,
 } from 'firebase/auth';
+/* import {
+  getFirestore, collection, getDocs,
+} from 'firebase/firestore'; */
+
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -36,3 +41,19 @@ export function SignInEmail(email, password) {
   const promesaLoginEmailAndPassword = signInWithEmailAndPassword(auth, email, password);
   return promesaLoginEmailAndPassword;
 }
+
+// Firestore
+
+/* const db = getFirestore();
+const colRef = collection(db, 'Posts');
+getDocs(colRef)
+  .then((snapshot) => {
+    const posts = [];
+    snapshot.docs.forEach((doc) => {
+      posts.push({ ...doc.data(), id: doc.id });
+    });
+    console.log(posts);
+})
+  .catch(err => {
+  console.log(err.message);
+}) */
