@@ -1,3 +1,7 @@
+.wallSection {
+    display:grid;
+    grid-template-rows: 20vh 60vh 20vh;
+}
 .divUp {
     display: flex;
     justify-content: center;
@@ -5,6 +9,14 @@
     height: 82px;
     background-color: #A58AF0;
     margin: 0;
+}
+
+.divMid {
+    display: flex;
+    justify-content: center;
+    /*background-color: blue;*/
+    height: 500px;
+    width: auto;
 }
 
 .divDown {

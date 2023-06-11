@@ -1,12 +1,11 @@
-// Import the functions you need from the SDKs you need
-import { initializeApp } from 'firebase/app';
+import { initializeApp} from 'firebase/app';
 import {
   getAuth, createUserWithEmailAndPassword, GoogleAuthProvider, signInWithPopup,
-  signInWithEmailAndPassword,
+  signInWithEmailAndPassword
 } from 'firebase/auth';
-/* import {
-  getFirestore, collection, getDocs,
-} from 'firebase/firestore'; */
+import {
+  getFirestore, collection, getDocs, onSnapshot, addDoc
+} from 'firebase/firestore';
 
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -43,17 +42,13 @@ export function SignInEmail(email, password) {
 }
 
 // Firestore
+// Obtiene la base de datos Firestore
+export const db = getFirestore(app);
+// REFERENCIA la coleccion (Post) de la base de datos (db)
+export const colRef = collection(db, 'Posts');
+console.log(db);
 
-/* const db = getFirestore();
-const colRef = collection(db, 'Posts');
-getDocs(colRef)
-  .then((snapshot) => {
-    const posts = [];
-    snapshot.docs.forEach((doc) => {
-      posts.push({ ...doc.data(), id: doc.id });
-    });
-    console.log(posts);
-})
-  .catch(err => {
-  console.log(err.message);
-}) */
+export const getPosts = () => getDocs(colRef);
+export const onGetPosts = () => console.log(onGetPosts);
+
+export { onSnapshot, getDocs, addDoc}

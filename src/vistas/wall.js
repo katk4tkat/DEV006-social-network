@@ -1,6 +1,4 @@
-import {
-  getFirestore, collection, onSnapshot, addDoc, deleteDoc, doc,
-} from 'firebase/firestore';
+import { colRef, onSnapshot, addDoc } from '../config/firebase.js';
 
 export function wall(navigateTo) {
   const wallSection = document.createElement('section');
@@ -17,6 +15,8 @@ export function wall(navigateTo) {
   const btnHome = document.createElement('img');
   const btnPlus = document.createElement('img');
   const btnUser = document.createElement('img');
+  const divPosts = document.createElement('div');
+  const post = document.createElement('p');
 
   wallSection.className = 'wallSection';
   divUp.className = 'divUp';
@@ -32,6 +32,7 @@ export function wall(navigateTo) {
   btnPlus.className = 'btnPlus';
   btnUser.className = 'btnUser';
   smallLogo.className = 'smallLogo';
+  divPosts.className = 'divPost';
 
   btnHome.src = './img/home.png';
   btnPlus.src = './img/plus.png';
@@ -43,18 +44,76 @@ export function wall(navigateTo) {
   inputPost.placeholder = 'Write your post here';
   labelTittlePost.setAttribute('for', 'post');
 
+
   // Firestore
 
-  const db = getFirestore();
-  const colRef = collection(db, 'Posts');
+  window.addEventListener('DOMContentLoaded', async () => {
+    onSnapshot(colRef, (querySnapshot) => {
+      querySnapshot.forEach((doc) => {
+        const postData = doc.data();
+        const postElement = document.createElement('p');
+        const titleElement = document.createElement('h3');
+        postElement.className = 'postElement';
+        titleElement.className = 'titleElement';
+        postElement.innerText = postData.Post;
+        titleElement.innerText = postData.Title;
+        divPosts.append(titleElement, postElement);
+        divMid.insertBefore(divPosts, formPost);
+      });
+    });
+  });
+  
+
+  /* window.addEventListener('DOMContentLoaded', async () => {
+    const querySnapshot = await getPosts();
+    querySnapshot.forEach(doc => {
+      console.log(doc.data());
+      title.innerText = doc.data().Title;
+      post.innerText = doc.data().Post;
+      divPosts.append(title, post, textoPosts);
+      divMid.insertBefore(divPosts, formPost);
+    });
+  }); */
+
+  /*  function pintarPost(postData) {
+      title.innerText = postData.Title;
+      post.innerText = postData.Post;
+      divPosts.append(title, post);
+      divMid.insertBefore(divPosts, formPost);
+    } */
 
   onSnapshot(colRef, (snapshot) => {
-    const posts = [];
+    const instantanea = [];
     snapshot.docs.forEach((doc) => {
-      posts.push({ ...doc.data(), id: doc.id });
+      instantanea.push({ ...doc.data(), id: doc.id });
     });
-    console.log(posts);
+    console.log(instantanea);
   });
+
+
+  window.addEventListener('DOMContentLoaded', async () => {
+    await onSnapshot(colRef, (snapshot) => {
+      const instantanea = [];
+      snapshot.docs.forEach((doc) => {
+        instantanea.push({ ...doc.data(), id: doc.id });
+      });
+    });
+  });
+
+  /*  function pintarPost(post) {
+      window.addEventListener('DOMContentLoaded', async () => {
+        const obtenerPost = getDoc(colRef);
+        const querySnapshot = await obtenerPost();
+        querySnapshot.forEach(doc => {
+          const createPost = (postData) => {
+            const tittle = document.createElement('p');
+            const posts = document.createElement('p');
+            tittle.innerText = postData.Title;
+            posts.innerText = postData.Post;
+            divMid.appendChild(createPost);
+          };
+        });
+      }); */
 
   buttonPostear.addEventListener('click', (e) => {
     e.preventDefault();
@@ -65,26 +124,18 @@ export function wall(navigateTo) {
     })
       .then(() => {
         formPost.reset();
-      })
-  });
-
-  buttonDelete.addEventListener('click', (e) => {
-    e.preventDefault();
-    console.log('delete funciona');
-    const docRef = doc(db, 'Posts', inputTittlePost.value);
-    deleteDoc(docRef)
-      .then(() => {
-        formPost.reset();
       });
   });
 
-  const divPosts = document.createElement('div');
-  const post = document.createElement('p');
-
-  divPosts.className = 'divPost';
-  post.className = 'post';
-
-  post.innerText = inputTittlePost.value; // for each?
+  /*  buttonDelete.addEventListener('click', (e) => {
+      e.preventDefault();
+      console.log('delete funciona');
+      const docRef = doc(db, 'Posts', inputTittlePost.value);
+      deleteDoc(docRef)
+        .then(() => {
+          formPost.reset();
+        });
+    }); */
 
   divUp.append(smallLogo);
   divPosts.append(post);
