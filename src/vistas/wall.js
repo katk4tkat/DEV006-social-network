@@ -1,4 +1,5 @@
-import { colRef, onSnapshot, addDoc } from '../config/firebase.js';
+import { colRef, onSnapshot, addDoc, deletePost, FieldValue} from '../config/firebase.js';
+import { doc } from 'firebase/firestore';
 
 export function wall(navigateTo) {
   const wallSection = document.createElement('section');
@@ -10,10 +11,8 @@ export function wall(navigateTo) {
   const inputTittlePost = document.createElement('input');
   const inputPost = document.createElement('input');
   const buttonPostear = document.createElement('button');
-  const buttonDelete = document.createElement('button');
   const smallLogo = document.createElement('img');
   const btnHome = document.createElement('img');
-  const btnPlus = document.createElement('img');
   const btnUser = document.createElement('img');
   const divPosts = document.createElement('div');
   const post = document.createElement('p');
@@ -27,60 +26,81 @@ export function wall(navigateTo) {
   inputTittlePost.className = 'inputTittlePost';
   inputPost.className = 'inputPost';
   buttonPostear.className = 'buttonPostear';
-  buttonDelete.className = 'buttonDelete';
   btnHome.className = 'btnHome';
-  btnPlus.className = 'btnPlus';
   btnUser.className = 'btnUser';
   smallLogo.className = 'smallLogo';
   divPosts.className = 'divPost';
 
   btnHome.src = './img/home.png';
-  btnPlus.src = './img/plus.png';
   btnUser.src = './img/user.png';
   smallLogo.src = './img/logoLKPArt_corto.png';
+  inputTittlePost.required = true;
+  inputPost.required = true;
   buttonPostear.textContent = 'Post';
-  buttonDelete.textContent = 'Delete';
   labelTittlePost.textContent = 'Tittle';
   inputPost.placeholder = 'Write your post here';
   labelTittlePost.setAttribute('for', 'post');
-
 
   // Firestore
 
   window.addEventListener('DOMContentLoaded', async () => {
     onSnapshot(colRef, (querySnapshot) => {
+      // Borra los post antiguos
+      while (divPosts.firstChild) {
+        divPosts.removeChild(divPosts.firstChild);
+      }
       querySnapshot.forEach((doc) => {
         const postData = doc.data();
+        const postCard = document.createElement('div');
         const postElement = document.createElement('p');
         const titleElement = document.createElement('h3');
+        const likeBtn = document.createElement('button');
+        const deleteBtn = document.createElement('button');
+  
+        deleteBtn.className = 'deleteBtn';
+        likeBtn.className = 'likeBtn';
+        postCard.className = 'postCard';
         postElement.className = 'postElement';
         titleElement.className = 'titleElement';
+  
+        deleteBtn.innerHTML = 'delete';
+        deleteBtn.setAttribute('data-id', doc.id);
+        likeBtn.innerText = 'like';
         postElement.innerText = postData.Post;
         titleElement.innerText = postData.Title;
-        divPosts.append(titleElement, postElement);
-        divMid.insertBefore(divPosts, formPost);
+  
+        // funcionalidad boton delete
+        deleteBtn.addEventListener('click', (e) => {
+          const postId = e.target.getAttribute('data-id');
+          deletePost(postId);
+        });
+  
+        // funcionalidad boton like
+        likeBtn.setAttribute('data-post-id', doc.id); // Almacena el ID de la publicación como atributo
+        likeBtn.addEventListener('click', (e) => {
+          e.preventDefault();
+          console.log('like funciona');
+          const postId = e.target.getAttribute('data-post-id'); // Obtiene el ID de la publicación desde el atributo
+          // Actualiza el contador de “Me gusta” en la base de datos
+          const docRef = doc(colRef, postId);
+          const increment = firebase.firestore.FieldValue.increment(1);
+          docRef.update({ likes: increment })
+            .then(() => {
+              console.log('Me gusta agregado');
+            })
+            .catch((error) => {
+              console.error('Error al agregar el Me gusta:', error);
+            });
+        });
+  
+        postCard.appendChild(titleElement);
+        postCard.appendChild(postElement);
+        postCard.appendChild(likeBtn);
+        postCard.appendChild(deleteBtn);
+        divPosts.appendChild(postCard);
       });
     });
   });
-  
-
-  /* window.addEventListener('DOMContentLoaded', async () => {
-    const querySnapshot = await getPosts();
-    querySnapshot.forEach(doc => {
-      console.log(doc.data());
-      title.innerText = doc.data().Title;
-      post.innerText = doc.data().Post;
-      divPosts.append(title, post, textoPosts);
-      divMid.insertBefore(divPosts, formPost);
-    });
-  }); */
-
-  /*  function pintarPost(postData) {
-      title.innerText = postData.Title;
-      post.innerText = postData.Post;
-      divPosts.append(title, post);
-      divMid.insertBefore(divPosts, formPost);
-    } */
 
   onSnapshot(colRef, (snapshot) => {
     const instantanea = [];
@@ -90,7 +110,6 @@ export function wall(navigateTo) {
     console.log(instantanea);
   });
 
-
   window.addEventListener('DOMContentLoaded', async () => {
     await onSnapshot(colRef, (snapshot) => {
       const instantanea = [];
@@ -99,21 +118,6 @@ export function wall(navigateTo) {
       });
     });
   });
-
-  /*  function pintarPost(post) {
-      window.addEventListener('DOMContentLoaded', async () => {
-        const obtenerPost = getDoc(colRef);
-        const querySnapshot = await obtenerPost();
-        querySnapshot.forEach(doc => {
-          const createPost = (postData) => {
-            const tittle = document.createElement('p');
-            const posts = document.createElement('p');
-            tittle.innerText = postData.Title;
-            posts.innerText = postData.Post;
-            divMid.appendChild(createPost);
-          };
-        });
-      }); */
 
   buttonPostear.addEventListener('click', (e) => {
     e.preventDefault();
@@ -127,21 +131,11 @@ export function wall(navigateTo) {
       });
   });
 
-  /*  buttonDelete.addEventListener('click', (e) => {
-      e.preventDefault();
-      console.log('delete funciona');
-      const docRef = doc(db, 'Posts', inputTittlePost.value);
-      deleteDoc(docRef)
-        .then(() => {
-          formPost.reset();
-        });
-    }); */
-
   divUp.append(smallLogo);
   divPosts.append(post);
   divMid.append(inputPost, buttonPostear, formPost, divPosts);
-  divDown.append(btnHome, btnPlus, btnUser);
+  divDown.append(btnHome, btnUser);
   wallSection.append(divUp, divMid, divDown);
-  formPost.append(labelTittlePost, inputTittlePost, inputPost, buttonPostear, buttonDelete);
+  formPost.append(labelTittlePost, inputTittlePost, inputPost, buttonPostear);
   return wallSection;
 }
