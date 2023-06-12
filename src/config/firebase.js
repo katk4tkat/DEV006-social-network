@@ -4,7 +4,9 @@ import {
   signInWithEmailAndPassword
 } from 'firebase/auth';
 import {
-  getFirestore, collection, getDocs, onSnapshot, addDoc, deleteDoc, FieldValue, doc
+  getFirestore, collection, getDocs, onSnapshot, addDoc, deleteDoc, FieldValue, doc,
+  getDoc,
+  updateDoc
 } from 'firebase/firestore';
 
 // TODO: Add SDKs for Firebase products that you want to use
@@ -51,5 +53,7 @@ console.log(db);
 export const getPosts = () => getDocs(colRef);
 export const onGetPosts = () => console.log(onGetPosts);
 export const deletePost = id => deleteDoc(doc(db, 'Posts', id));
-
+export const getPost = (id) => getDoc(doc(db,'Posts', id));
+export const updatePost = (id,newfields) =>
+updateDoc(doc(db,'posts', id), newfields);
 export { onSnapshot, getDocs, addDoc, deleteDoc, FieldValue, doc};

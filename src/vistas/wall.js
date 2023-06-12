@@ -1,5 +1,5 @@
-import { colRef, onSnapshot, addDoc, deletePost, FieldValue} from '../config/firebase.js';
-import { doc } from 'firebase/firestore';
+import { colRef, onSnapshot, addDoc, deletePost, FieldValue, getPost, updatePost} from '../config/firebase.js';
+
 
 export function wall(navigateTo) {
   const wallSection = document.createElement('section');
@@ -42,7 +42,7 @@ export function wall(navigateTo) {
   labelTittlePost.setAttribute('for', 'post');
 
   // Firestore
-
+  let editStatus = false;
   window.addEventListener('DOMContentLoaded', async () => {
     onSnapshot(colRef, (querySnapshot) => {
       // Borra los post antiguos
@@ -54,18 +54,19 @@ export function wall(navigateTo) {
         const postCard = document.createElement('div');
         const postElement = document.createElement('p');
         const titleElement = document.createElement('h3');
-        const likeBtn = document.createElement('button');
+        const editBtn = document.createElement('button');
         const deleteBtn = document.createElement('button');
   
         deleteBtn.className = 'deleteBtn';
-        likeBtn.className = 'likeBtn';
+        editBtn.className = 'editBtn';
         postCard.className = 'postCard';
         postElement.className = 'postElement';
         titleElement.className = 'titleElement';
   
         deleteBtn.innerHTML = 'delete';
         deleteBtn.setAttribute('data-id', doc.id);
-        likeBtn.innerText = 'like';
+        editBtn.innerText = 'edit';
+        editBtn.setAttribute('data-id', doc.id);
         postElement.innerText = postData.Post;
         titleElement.innerText = postData.Title;
   
@@ -75,34 +76,36 @@ export function wall(navigateTo) {
           deletePost(postId);
         });
   
-        // funcionalidad boton like
-        likeBtn.setAttribute('data-post-id', doc.id); // Almacena el ID de la publicación como atributo
-        likeBtn.addEventListener('click', (e) => {
-          e.preventDefault();
-          console.log('like funciona');
-          const postId = e.target.getAttribute('data-post-id'); // Obtiene el ID de la publicación desde el atributo
-          // Actualiza el contador de “Me gusta” en la base de datos
-          const docRef = doc(colRef, postId);
-          const increment = firebase.firestore.FieldValue.increment(1);
-          docRef.update({ likes: increment })
-            .then(() => {
-              console.log('Me gusta agregado');
-            })
-            .catch((error) => {
-              console.error('Error al agregar el Me gusta:', error);
-            });
-        });
-  
+        // funcionalidad botón edit
+
+editBtn.addEventListener('click', async (e) => {
+  console.log('editando')
+  const postId = e.target.getAttribute('data-id');
+ const doc = await getPost(e.target.dataset.id)
+ const editPostData = doc.data()
+ inputTittlePost.value = editPostData.Title;
+inputPost.value = editPostData.Post;
+ editStatus = true;
+  });
+
         postCard.appendChild(titleElement);
         postCard.appendChild(postElement);
-        postCard.appendChild(likeBtn);
+        postCard.appendChild(editBtn);
         postCard.appendChild(deleteBtn);
         divPosts.appendChild(postCard);
       });
     });
   });
+  // hasta acá el código pasa el post hacia los imputs para editarlos.
+  formPost.addEventListener('submit'), (e)=> {
+    e.preventDefault();
+    const tituloEditado = formPost['post-title'];
+    const description = formPost["Post-description"];
 
-  onSnapshot(colRef, (snapshot) => {
+  }
+
+
+   onSnapshot(colRef, (snapshot) => {
     const instantanea = [];
     snapshot.docs.forEach((doc) => {
       instantanea.push({ ...doc.data(), id: doc.id });
@@ -133,7 +136,7 @@ export function wall(navigateTo) {
 
   divUp.append(smallLogo);
   divPosts.append(post);
-  divMid.append(inputPost, buttonPostear, formPost, divPosts);
+  divMid.append(formPost, divPosts);
   divDown.append(btnHome, btnUser);
   wallSection.append(divUp, divMid, divDown);
   formPost.append(labelTittlePost, inputTittlePost, inputPost, buttonPostear);
