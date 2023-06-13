@@ -69,7 +69,7 @@ export function login(navigateTo) {
     const promesaRegistroGoogle = signInWithGoogle();
     promesaRegistroGoogle.then((result) => {
       console.log(result, 'funciona result promesa');
-      navigateTo('/');
+      navigateTo('/wall');
     }).catch((error) => {
       console.log(error, 'catch de google');
       // Handle Errors here.
