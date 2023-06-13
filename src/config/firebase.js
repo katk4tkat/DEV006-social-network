@@ -56,4 +56,6 @@ export const deletePost = id => deleteDoc(doc(db, 'Posts', id));
 export const getPost = (id) => getDoc(doc(db,'Posts', id));
 export const updatePost = (id,newfields) =>
 updateDoc(doc(db,'posts', id), newfields);
-export { onSnapshot, getDocs, addDoc, deleteDoc, FieldValue, doc};
+export const savePost = (Title, Post) =>
+addDoc(colRef, { Title, Post });
+export { onSnapshot, getDocs, addDoc, deleteDoc, FieldValue, doc };
