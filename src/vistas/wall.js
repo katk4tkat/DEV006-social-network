@@ -6,7 +6,6 @@ import {
   FieldValue,
   getPost,
   updatePost,
-  savePost
 } from '../config/firebase.js';
 
 
@@ -46,7 +45,7 @@ export function wall(navigateTo) {
   inputTittlePost.required = true;
   inputPost.required = true;
   buttonPostear.textContent = 'Post';
-  labelTittlePost.textContent = 'Tittle';
+  labelTittlePost.textContent = 'What are we going to play today?';
   inputPost.placeholder = 'Write your post here';
   labelTittlePost.setAttribute('for', 'post');
 
@@ -109,56 +108,29 @@ export function wall(navigateTo) {
     });
   });
 
-  formPost.addEventListener('submit', async (e) => {
+  buttonPostear.addEventListener('click', async (e) => {
     e.preventDefault();
-    const Title = formPost.querySelector('.inputTittlePost').value;
-    const Post = formPost.querySelector('.inputPost').value;
+    console.log('boton funciona');
     try {
       if (!editStatus) {
-        await savePost(Title, Post);
+        await addDoc(colRef, {
+          Title: inputTittlePost.value,
+          Post: inputPost.value,
+        });
       } else {
         await updatePost(id, {
-          Title: Title,
-          Post: Post,
+          Title: inputTittlePost.value,
+          Post: inputPost.value,
         });
         editStatus = false;
         id = '';
         buttonPostear.innerText = 'Save';
       }
       formPost.reset();
-      title.focus();
+      inputTittlePost.focus();
     } catch (error) {
       console.log(error);
     }
-  });
-
-  onSnapshot(colRef, (snapshot) => {
-    const instantanea = [];
-    snapshot.docs.forEach((doc) => {
-      instantanea.push({ ...doc.data(), id: doc.id });
-    });
-    console.log(instantanea);
-  });
-
-  window.addEventListener('DOMContentLoaded', async () => {
-    await onSnapshot(colRef, (snapshot) => {
-      const instantanea = [];
-      snapshot.docs.forEach((doc) => {
-        instantanea.push({ ...doc.data(), id: doc.id });
-      });
-    });
-  });
-
-  buttonPostear.addEventListener('click', (e) => {
-    e.preventDefault();
-    console.log('boton funciona');
-    addDoc(colRef, {
-      Title: inputTittlePost.value,
-      Post: inputPost.value,
-    })
-      .then(() => {
-        formPost.reset();
-      });
   });
 
   divUp.append(smallLogo);

@@ -71,3 +71,23 @@
 .btnHome:hover, .btnPlus:hover, .btnUser:hover{
    background-color: black;
 }
+
+
+
+
+
+
+
+.labelTittlePost {
+    font-family: 'Montserrat', sans-serif;
+    color: #F89626;
+}
+
+.formPost {
+    display: grid;
+    grid-template-rows: 10hv, 30hv, 50hv, 10hv;
+}
+
+.inputPost {
+    
+}
