@@ -13,12 +13,14 @@ export function wall(navigateTo) {
   const wallSection = document.createElement('section');
   const divUp = document.createElement('div');
   const divMid = document.createElement('div');
-  const divDown = document.createElement('div');
+  const imgFamiliaHome = document.createElement('img');
   const formPost = document.createElement('form');
   const labelTittlePost = document.createElement('label');
   const inputTittlePost = document.createElement('input');
   const inputPost = document.createElement('input');
   const buttonPostear = document.createElement('button');
+  const textoNuevasPublicaciones = document.createElement('h3');
+  const lineaDivisora = document.createElement('hr');
   const smallLogo = document.createElement('img');
   const btnHome = document.createElement('img');
   const btnUser = document.createElement('img');
@@ -28,17 +30,20 @@ export function wall(navigateTo) {
   wallSection.className = 'wallSection';
   divUp.className = 'divUp';
   divMid.className = 'divMid';
-  divDown.className = 'divDown';
+  imgFamiliaHome.className = 'imgFamiliaHome';
   formPost.className = 'formPost';
   labelTittlePost.className = 'labelTittlePost';
   inputTittlePost.className = 'inputTittlePost';
   inputPost.className = 'inputPost';
   buttonPostear.className = 'buttonPostear';
+  textoNuevasPublicaciones.className = 'textoNuevasPublicaciones';
+  lineaDivisora.className = 'lineaDivisora';
   btnHome.className = 'btnHome';
   btnUser.className = 'btnUser';
   smallLogo.className = 'smallLogo';
   divPosts.className = 'divPost';
 
+  imgFamiliaHome.src = './img/comunidad.png';
   btnHome.src = './img/home.png';
   btnUser.src = './img/user.png';
   smallLogo.src = './img/logoLKPArt_corto.png';
@@ -46,9 +51,12 @@ export function wall(navigateTo) {
   inputPost.required = true;
   buttonPostear.textContent = 'Post';
   labelTittlePost.textContent = 'What are we going to play today?';
+  textoNuevasPublicaciones.textContent = 'Recently added post';
+  inputTittlePost.placeholder = 'What activity do you want to do?';
   inputPost.placeholder = 'Write your post here';
   labelTittlePost.setAttribute('for', 'post');
-
+  inputTittlePost.setAttribute = ('input', 'textarea');
+  inputPost.setAttribute = ('input', 'textarea');
   // Firestore
   let editStatus = false;
   let id = '';
@@ -62,19 +70,22 @@ export function wall(navigateTo) {
         const postData = doc.data();
         const postCard = document.createElement('div');
         const postElement = document.createElement('p');
-        const titleElement = document.createElement('h3');
-        const editBtn = document.createElement('button');
-        const deleteBtn = document.createElement('button');
+        const titleElement = document.createElement('h4');
+        const divBtnIconos = document.createElement('div');
+        const editBtn = document.createElement('img');
+        const deleteBtn = document.createElement('img');
 
+        divBtnIconos.className = 'divBtnIconos';
         deleteBtn.className = 'deleteBtn';
         editBtn.className = 'editBtn';
         postCard.className = 'postCard';
         postElement.className = 'postElement';
         titleElement.className = 'titleElement';
 
+        editBtn.src = './img/pencil.png';
+        deleteBtn.src = './img/trashcan.png';
         deleteBtn.innerHTML = 'delete';
         deleteBtn.setAttribute('data-id', doc.id);
-        editBtn.innerText = 'edit';
         editBtn.setAttribute('data-id', doc.id);
         postElement.innerText = postData.Post;
         titleElement.innerText = postData.Title;
@@ -98,11 +109,10 @@ export function wall(navigateTo) {
           id = doc.id;
           buttonPostear.innerText = 'Update';
         });
-
+        divBtnIconos.append(deleteBtn, editBtn);
         postCard.appendChild(titleElement);
         postCard.appendChild(postElement);
-        postCard.appendChild(editBtn);
-        postCard.appendChild(deleteBtn);
+        postCard.appendChild(divBtnIconos);
         divPosts.appendChild(postCard);
       });
     });
@@ -133,11 +143,20 @@ export function wall(navigateTo) {
     }
   });
 
+  onSnapshot(colRef, (snapshot) => {
+    const instantanea = [];
+    snapshot.docs.forEach((doc) => {
+      instantanea.push({ ...doc.data(), id: doc.id });
+    });
+    console.log(instantanea);
+  });
+
+
   divUp.append(smallLogo);
   divPosts.append(post);
   divMid.append(formPost, divPosts);
-  divDown.append(btnHome, btnUser);
-  wallSection.append(divUp, divMid, divDown);
-  formPost.append(labelTittlePost, inputTittlePost, inputPost, buttonPostear);
+  wallSection.append(divUp, divMid, imgFamiliaHome);
+  formPost.append(
+    labelTittlePost, inputTittlePost, inputPost, buttonPostear, textoNuevasPublicaciones, lineaDivisora);
   return wallSection;
 }

@@ -3,6 +3,11 @@ body {
     font-family: 'Montserrat', sans-serif;
 }
 
+.homeSection {
+    display: grid;
+    grid-template-rows: 15vh 50vh 20vh 15vh;
+}
+
 /* Home */
 .logoGrande {
     width: 108px;
@@ -75,15 +80,19 @@ body {
     font-family: 'Montserrat', sans-serif;
 }
 
-.familyImg {
-    position: absolute;
-    width: 358px;
-    height: 123px;
-    left: 3px;
-    top: 489px;
+.imgFamiliaHome {
+    width: 25%;
+    height: auto;
+    justify-content: center;
+    display: block;
+  margin-left: auto;
+  margin-right: auto; 
+  grid-row: 3;
+  margin-top: 70px;
 }
 
 .footer {
+    grid-row: 4;
     text-align: center;
     padding: 4px;
     width: auto;
