@@ -15,6 +15,7 @@ export function home(navigateTo) {
   buttonLoginHome.className = 'btnLoginHome';
   imgFamiliaHome.className = 'familyImg';
   footer.className = 'footer';
+  
   logoGrande.src = './img/logoLKP_final.png';
   textoHome.textContent = 'Let Kids Play is an application that seeks to generate meeting spaces between people who are caregivers of children ♥♥♥';
   buttonLoginHome.textContent = 'Login';

@@ -8,7 +8,6 @@ import {
   updatePost,
 } from '../config/firebase.js';
 
-
 export function wall(navigateTo) {
   const wallSection = document.createElement('section');
   const divUp = document.createElement('div');
@@ -22,8 +21,6 @@ export function wall(navigateTo) {
   const textoNuevasPublicaciones = document.createElement('h3');
   const lineaDivisora = document.createElement('hr');
   const smallLogo = document.createElement('img');
-  const btnHome = document.createElement('img');
-  const btnUser = document.createElement('img');
   const divPosts = document.createElement('div');
   const post = document.createElement('p');
 
@@ -38,14 +35,10 @@ export function wall(navigateTo) {
   buttonPostear.className = 'buttonPostear';
   textoNuevasPublicaciones.className = 'textoNuevasPublicaciones';
   lineaDivisora.className = 'lineaDivisora';
-  btnHome.className = 'btnHome';
-  btnUser.className = 'btnUser';
   smallLogo.className = 'smallLogo';
   divPosts.className = 'divPost';
 
   imgFamiliaHome.src = './img/comunidad.png';
-  btnHome.src = './img/home.png';
-  btnUser.src = './img/user.png';
   smallLogo.src = './img/logoLKPArt_corto.png';
   inputTittlePost.required = true;
   inputPost.required = true;

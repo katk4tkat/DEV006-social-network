@@ -1,11 +1,14 @@
 body {
+    display: flex;
+    flex-direction: row;
+    align-content: center;
     background-color: #EEF8FF;
     font-family: 'Montserrat', sans-serif;
 }
 
 .homeSection {
     display: grid;
-    grid-template-rows: 15vh 50vh 20vh 15vh;
+    grid-template-rows: 15% 50% 20% 15%;
 }
 
 /* Home */
@@ -80,15 +83,12 @@ body {
     font-family: 'Montserrat', sans-serif;
 }
 
-.imgFamiliaHome {
-    width: 25%;
+.familyImg {
+    background-color: brown;
+    display: grid;
+    width: auto;
     height: auto;
-    justify-content: center;
-    display: block;
-  margin-left: auto;
-  margin-right: auto; 
-  grid-row: 3;
-  margin-top: 70px;
+
 }
 
 .footer {
