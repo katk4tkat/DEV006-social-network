@@ -5,6 +5,7 @@ export function home(navigateTo) {
   const textoHome = document.createElement('p');
   const buttonRegisterHome = document.createElement('button');
   const buttonLoginHome = document.createElement('button');
+  const containerImgFamily = document.createElement('div');
   const imgFamiliaHome = document.createElement('img');
   const footer = document.createElement('footer');
 
@@ -13,6 +14,7 @@ export function home(navigateTo) {
   textoHome.className = 'textoHome';
   buttonRegisterHome.className = 'btnRegisterHome';
   buttonLoginHome.className = 'btnLoginHome';
+  containerImgFamily.className ='containerImgFamily'
   imgFamiliaHome.className = 'familyImg';
   footer.className = 'footer';
   
