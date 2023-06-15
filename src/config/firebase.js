@@ -1,12 +1,12 @@
-import { initializeApp} from 'firebase/app';
+import { initializeApp } from 'firebase/app';
 import {
   getAuth, createUserWithEmailAndPassword, GoogleAuthProvider, signInWithPopup,
-  signInWithEmailAndPassword
+  signInWithEmailAndPassword,
 } from 'firebase/auth';
 import {
   getFirestore, collection, getDocs, onSnapshot, addDoc, deleteDoc, FieldValue, doc,
   getDoc,
-  updateDoc
+  updateDoc,
 } from 'firebase/firestore';
 
 // TODO: Add SDKs for Firebase products that you want to use
@@ -53,9 +53,11 @@ console.log(db);
 export const getPosts = () => getDocs(colRef);
 export const onGetPosts = () => console.log(onGetPosts);
 export const deletePost = id => deleteDoc(doc(db, 'Posts', id));
-export const getPost = (id) => getDoc(doc(db,'Posts', id));
-export const updatePost = (id,newfields) =>
-updateDoc(doc(db,'posts', id), newfields);
+export const getPost = (id) => getDoc(doc(db, 'Posts', id));
+export const updatePost = (id, newfields) =>
+  updateDoc(doc(db, 'Posts', id), newfields);
 export const savePost = (Title, Post) =>
 addDoc(colRef, { Title, Post });
-export { onSnapshot, getDocs, addDoc, deleteDoc, FieldValue, doc };
+export {
+  onSnapshot, getDocs, addDoc, deleteDoc, FieldValue, doc,
+};
