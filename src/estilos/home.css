@@ -1,14 +1,20 @@
 body {
-    display: flex;
-    flex-direction: row;
-    align-content: center;
     background-color: #EEF8FF;
     font-family: 'Montserrat', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .homeSection {
-    display: grid;
-    grid-template-rows: 15% 50% 20% 15%;
+    display: block;
+   position:relative;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    
+
+
 }
 
 /* Home */
@@ -84,32 +90,25 @@ body {
 }
 
 .familyImg {
-    background-color: brown;
-    display: grid;
-    width: auto;
-    height: auto;
-
+display: flex;
+  
+  align-items: center;
+  position: relative;
+  top: 50%;
+  left: 50%;
+  transform: translate(0, 80%);
+  max-width: 500px;
+  
 }
 
-.footer {
-    grid-row: 4;
-    text-align: center;
-    padding: 4px;
-    width: auto;
-    height: 28px;
-    position: absolute;
-    left: 0;
-    right: 0;
-    margin: auto;
-    top: 612px;
-    background: #FFD1F7;
-}
+
+
 
 @media (max-width: 768px) {
 
     /* Home */
     .logoGrande {
-        width: 15%;
+        width: 25%;
         max-width: 108px;
         height: auto;
         position: absolute;
@@ -168,14 +167,15 @@ body {
     }
 
     .footer {
+        display: flex;
+        bottom: -50px;
+        order: 4;
         text-align: center;
         padding: 4px;
         width: 100%;
         height: auto;
-        position: fixed;
-        bottom: 0;
         background: #FFD1F7;
-        display: grid;
+        
         place-items: center;
         font-size: auto;
     }
