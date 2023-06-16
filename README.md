@@ -1,14 +1,5 @@
 # SN-13 Let Kids Play
 
-## Índice
-
-* [1. Proyecto - LKP] (## 1. Proyecto  Social Network: Let Kids Play! (LKP))
-* [2. Historias de Usuario ](## 2. Historias de Usuario )
-* [3. Diseño](## 3. Diseño)
-* [4. Resultado](## 4. Resultado)
-
-# 1. Proyecto  Social Network: Let Kids Play! (LKP)
-
 [Link al Proyecto](https://katk4tkat.github.io/DEV006-social-network/src/index.html)
 
 Somos una red que busca generar tejidos sociales de cuidado y apoyo colectivos entre personas que están a cargo de niñes. 
