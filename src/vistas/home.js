@@ -8,13 +8,13 @@ export function home(navigateTo) {
   const containerImgFamily = document.createElement('div');
   const imgFamiliaHome = document.createElement('img');
   const footer = document.createElement('footer');
-
+  
   logoGrande.className = 'logoGrande';
   divHome.className = 'divHome';
   textoHome.className = 'textoHome';
   buttonRegisterHome.className = 'btnRegisterHome';
   buttonLoginHome.className = 'btnLoginHome';
-  containerImgFamily.className ='containerImgFamily'
+  containerImgFamily.className = 'containerImgFamily';
   imgFamiliaHome.className = 'familyImg';
   footer.className = 'footer';
   
