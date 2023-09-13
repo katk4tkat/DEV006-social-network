@@ -1,0 +1,25 @@
+[debug] [2023-06-16T18:17:28.417Z] ----------------------------------------------------------------------
+[debug] [2023-06-16T18:17:28.419Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\Kat\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js init
+[debug] [2023-06-16T18:17:28.420Z] CLI Version:   12.4.0
+[debug] [2023-06-16T18:17:28.420Z] Platform:      win32
+[debug] [2023-06-16T18:17:28.420Z] Node Version:  v18.15.0
+[debug] [2023-06-16T18:17:28.421Z] Time:          Fri Jun 16 2023 14:17:28 GMT-0400 (hora estándar de Chile)
+[debug] [2023-06-16T18:17:28.421Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2023-06-16T18:17:28.499Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2023-06-16T18:17:28.500Z] > authorizing via signed-in user (katk4tkat@gmail.com)
+[info] 
+     ######## #### ########  ######## ########     ###     ######  ########
+     ##        ##  ##     ## ##       ##     ##  ##   ##  ##       ##
+     ######    ##  ########  ######   ########  #########  ######  ######
+     ##        ##  ##    ##  ##       ##     ## ##     ##       ## ##
+     ##       #### ##     ## ######## ########  ##     ##  ######  ########
+
+You're about to initialize a Firebase project in this directory:
+
+  C:\Users\Kat\Desktop\LABORATORIA\SN\DEV006-social-network
+
+Before we get started, keep in mind:
+
+  * You are initializing within an existing Firebase project directory
+
