@@ -8,7 +8,7 @@ export function home(navigateTo) {
   const containerImgFamily = document.createElement('div');
   const imgFamiliaHome = document.createElement('img');
   const footer = document.createElement('footer');
-  
+
   logoGrande.className = 'logoGrande';
   divHome.className = 'divHome';
   textoHome.className = 'textoHome';
@@ -17,7 +17,7 @@ export function home(navigateTo) {
   containerImgFamily.className = 'containerImgFamily';
   imgFamiliaHome.className = 'familyImg';
   footer.className = 'footer';
-  
+
   logoGrande.src = './img/logoLKP_final.png';
   textoHome.textContent = 'Let Kids Play is an application that seeks to generate meeting spaces between people who are caregivers of children ♥♥♥';
   buttonLoginHome.textContent = 'Login';
@@ -26,7 +26,7 @@ export function home(navigateTo) {
   footer.textContent = 'Copyright © 2023 Isabel Lira, Kat Bravo & Alejandra Martínez';
 
   buttonLoginHome.addEventListener('click', () => {
-      navigateTo('/login');
+    navigateTo('/login');
   });
 
   buttonRegisterHome.addEventListener('click', () => {
@@ -34,6 +34,6 @@ export function home(navigateTo) {
   });
 
   divHome.append(textoHome, buttonRegisterHome, buttonLoginHome);
-  homeSection.append(logoGrande, divHome, imgFamiliaHome, footer);
+  homeSection.append(logoGrande, divHome, footer);
   return homeSection;
 }

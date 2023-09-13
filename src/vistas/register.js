@@ -119,6 +119,6 @@ export function register(navigateTo) {
   registerGoogleBotton.append(divBtnGoogle);
   returnDiv.append(returnImg, returnLink);
   divRegister.append(signUpForm, returnDiv);
-  registerSection.append(logoPeque, divRegister, imgFamiliaHome);
+  registerSection.append(logoPeque, divRegister);
   return registerSection;
 }

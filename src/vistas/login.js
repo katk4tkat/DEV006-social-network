@@ -29,7 +29,7 @@ export function login(navigateTo) {
   imgFamiliaHome.className = 'familyImg';
   divLogin.className = 'divLogin';
 
-  logoGrande.src = './img/logoLKP_final.png';
+  logoGrande.src = '/img/logoLKP_final.png';
   inputEmail.placeholder = 'e-mail';
   inputPassword.placeholder = 'Password';
   inputPassword.type = 'password';
@@ -88,6 +88,6 @@ export function login(navigateTo) {
   divBtnGoogle.append(logoRegisterGoogle, textRegisterGoogle);
   loginGoogleButton.append(divBtnGoogle);
   divLogin.append(inputEmail, inputPassword, loginBtn, loginGoogleButton, divRegister);
-  LoginSection.append(logoGrande, divLogin, imgFamiliaHome);
+  LoginSection.append(logoGrande, divLogin);
   return LoginSection;
 }

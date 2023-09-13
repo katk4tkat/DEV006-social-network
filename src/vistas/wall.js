@@ -3,7 +3,6 @@ import {
   onSnapshot,
   addDoc,
   deletePost,
-  FieldValue,
   getPost,
   updatePost,
 } from '../config/firebase.js';
@@ -91,7 +90,7 @@ export function wall(navigateTo) {
 
         // funcionalidad botón edit
         editBtn.addEventListener('click', async (e) => {
-          console.log('editando')
+          console.log('editando');
           const postId = e.target.getAttribute('data-id');
           const doc = await getPost(e.target.dataset.id);
           const editPostData = doc.data();
@@ -148,7 +147,7 @@ export function wall(navigateTo) {
   divUp.append(smallLogo);
   divPosts.append(post);
   divMid.append(formPost, divPosts);
-  wallSection.append(divUp, divMid, imgFamiliaHome);
+  wallSection.append(divUp, divMid);
   formPost.append(
     labelTittlePost, inputTittlePost, inputPost, buttonPostear, textoNuevasPublicaciones, lineaDivisora);
   return wallSection;
